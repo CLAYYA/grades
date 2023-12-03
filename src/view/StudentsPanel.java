@@ -19,7 +19,7 @@ public class StudentsPanel extends JFrame implements ActionListener {
 	/*
 	 * 学生登陆后操作主界面
 	 */
-	JPanel contain,contain1;
+	JPanel contain;
 	String id;
 	Box hbox;
 	JButton infoButton, gradeButton, courseButton, editButton;
@@ -61,14 +61,18 @@ public class StudentsPanel extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == infoButton) {
-			contain1 = new JPanel();
-			hbox.add(contain1);
-			new Info(id, 1,contain1);
+			JPanel _contain = new JPanel();
+			hbox.add(_contain);
+			new Info(id, 1,_contain);
 			contain.updateUI();
 			pack();
 		}
 		if (e.getSource() == gradeButton) {
-			new GradeInfo(id);
+			JPanel _contain = new JPanel();
+			hbox.add(_contain);
+			new GradeInfo(id,_contain);
+			contain.updateUI();
+			pack();
 		}
 		if (e.getSource() == courseButton) {
 			new CourseView(id, 0);

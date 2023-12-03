@@ -31,12 +31,13 @@ public class GradeInfo extends JFrame {
 	String studentname;
 	String grade;
 
-	public GradeInfo(String id) {
-		super("¿Î³Ì");
+	public GradeInfo(String id,JPanel _contain) {
+//		super("¿Î³Ì");
 		this.id = id;
-		setSize(600, 400);
+//		setSize(600, 400);
 		contain = new JPanel();
-		setLocation(600, 400);
+		_contain.add(contain);
+//		setLocation(600, 400);
 		list = new JTextArea();
 		list.setEditable(false);
 		contain.add(list);
@@ -73,8 +74,6 @@ public class GradeInfo extends JFrame {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-
-		add(contain);
 		setVisible(true);
 	}
 }

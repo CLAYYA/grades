@@ -178,6 +178,6 @@ public class MainFrame extends JFrame implements ActionListener {
 		UIManager.put("TextField.arc", 999);
 		Jdbc.initDB();
 		new StudentsPanel("111222333");
-		new MainFrame();
+//		new MainFrame();
 	}
 }
