@@ -1,13 +1,11 @@
 package view;
 
-import java.awt.AWTEvent;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import controller.AddCourse;
 import controller.CourseView;
@@ -23,17 +21,25 @@ public class TeachersPanel extends JFrame implements ActionListener {
 	 */
 	
 	String idd;
-	JPanel contain;
+	public JPanel contain1,contain2,_contain,__contain,hugecontain;
 	JButton infoButton, gradeButton, courseButton, editButton, courseView, sortGrade;
+	Box vbox;
+	JFrame self;
+
 
 	public TeachersPanel(String idd) {
 		super("教师");
 		this.idd = idd;
-		setLocation(300, 200);
-		setSize(300, 340);
-		contain = new JPanel();
-		contain.setLayout(null);
-		add(contain);
+		setLocationRelativeTo(null);
+		setSize(400, 1700);
+		contain1 = new JPanel();
+		contain1.setLayout(new FlowLayout(FlowLayout.CENTER));
+		contain2 = new JPanel();
+		contain2.setLayout(new FlowLayout(FlowLayout.CENTER));
+		hugecontain = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
+		vbox = Box.createVerticalBox();
+
 		infoButton = new JButton("信息查询");
 		gradeButton = new JButton("成绩登录");
 		courseButton = new JButton("全部课程");
@@ -42,51 +48,83 @@ public class TeachersPanel extends JFrame implements ActionListener {
 		
 		sortGrade = new JButton("成绩统计");
 		
-		infoButton.setBounds(70, 40, 140, 30);
-		editButton.setBounds(70, 80, 140, 30);
-		courseView.setBounds(70, 120, 140, 30);
-		courseButton.setBounds(70, 160, 140, 30);
-		gradeButton.setBounds(70, 200, 140, 30);
+		infoButton.setPreferredSize(new Dimension(400,100));
+		editButton.setPreferredSize(new Dimension(400,100));
+		courseView.setPreferredSize(new Dimension(400,100));
+		courseButton.setPreferredSize(new Dimension(400,100));
+		gradeButton.setPreferredSize(new Dimension(400,100));
+		sortGrade.setPreferredSize(new Dimension(400,100));
 		
-		sortGrade.setBounds(70, 240, 140, 30);
-		
-		contain.add(infoButton);
+		contain1.add(infoButton);
 		infoButton.addActionListener(this);
-		contain.add(gradeButton);
+		contain1.add(gradeButton);
 		gradeButton.addActionListener(this);
-		contain.add(courseView);
+		contain1.add(courseView);
 		courseView.addActionListener(this);
-		contain.add(courseButton);
+		contain2.add(courseButton);
 		courseButton.addActionListener(this);
-		contain.add(editButton);
+		contain2.add(editButton);
 		editButton.addActionListener(this);
-		
-		contain.add(sortGrade);
+		contain2.add(sortGrade);
 		sortGrade.addActionListener(this);
 		
-		
+		vbox.add(contain1);
+		vbox.add(contain2);
+		hugecontain.add(vbox);
+		add(hugecontain);
+		pack();
+		_contain = new JPanel();
+		__contain = new JPanel();
 		setVisible(true);
 		enableEvents(AWTEvent.WINDOW_EVENT_MASK);
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == infoButton) {
-			new Info(idd, 0,contain);
+			_contain.removeAll();
+			__contain.removeAll();
+			vbox.add(_contain);
+			new Info(idd, 1,_contain);
+			vbox.updateUI();
+			pack();
 		}
 		if (e.getSource() == gradeButton) {
-			new GradeEnter(idd);
+			_contain.removeAll();
+			__contain.removeAll();
+			vbox.add(_contain);
+			vbox.add(__contain);
+			self = this;
+			new GradeEnter(idd,hugecontain,__contain,_contain,self);
+			hugecontain.updateUI();
+			pack();
 		}
-		if (e.getSource() == courseButton) {  
-			new CourseView(idd, 1,contain);
+		if (e.getSource() == courseButton) {
+			_contain.removeAll();
+			vbox.add(_contain);
+			new CourseView(idd, 1,_contain);
+			_contain.updateUI();
+			pack();
 		}
 		if (e.getSource() == editButton) {
-			new EditInfo(idd, 1,contain);
+			_contain.removeAll();
+			vbox.add(_contain);
+			new EditInfo(idd, 1,_contain);
+			_contain.updateUI();
+			pack();
 		}
 		if (e.getSource() == courseView) {
+			_contain.removeAll();
+			vbox.add(_contain);
 			new AddCourse();
+			_contain.updateUI();
+			pack();
 		}
 		if(e.getSource() == sortGrade){
+			_contain.removeAll();
+			vbox.add(_contain);
 			new SortGradeFrame();
+			_contain.updateUI();
+			pack();
 		}
 	}
 
