@@ -33,7 +33,7 @@ public class Info extends JPanel {
 //        setSize(300, 340);
 //        setLocation(600, 400);
         stuInfoJPanel = new JPanel();
-        stuInfoJPanel.setLayout(new GridLayout(20, 1));
+        stuInfoJPanel.setLayout(new GridLayout(10, 1));
         contain.add(stuInfoJPanel);
         ResultSet rs = Jdbc.SelectById("User", "id", id);
         try {
@@ -52,6 +52,7 @@ public class Info extends JPanel {
                 birLabel = new JLabel("生日:" + stu.getBirthday());
                 insLabel = new JLabel("学院:" + stu.getInstitute());
                 majorLabel = new JLabel("系别:" + stu.getMajor());
+
             } else {
                 t = new Teacher(id, pwd, name, gender, birthday, institute, major);
                 idLabel = new JLabel("账号:" + t.getId());
