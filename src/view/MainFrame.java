@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.plaf.FontUIResource;
+import javax.swing.UIManager;
 
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -44,8 +45,8 @@ public class MainFrame extends JFrame implements ActionListener {
 		setSize(1000, 800);
 		contain = new JPanel();
 		contain.setLayout(new FlowLayout(FlowLayout.CENTER, 120, 80));
-		idLabel = new JLabel("IDºÅ");
-		passwdLabel = new JLabel("ÃÜÂë");
+		idLabel = new JLabel("IDºÅ",JLabel.RIGHT);
+		passwdLabel = new JLabel("ÃÜÂë",JLabel.RIGHT);
 		idTextField = new JTextField();
 		passwdTextField = new JPasswordField();
 		logon = new JButton("µÇÂ½");
@@ -159,6 +160,7 @@ public class MainFrame extends JFrame implements ActionListener {
 			if (value instanceof FontUIResource)
 				UIManager.put(key, fontRes);
 		}
+
 	}
 
 	public static void main(String[] args) {
@@ -175,6 +177,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		UIManager.put("ProgressBar.arc", 7);
 		UIManager.put("TextField.arc", 999);
 		Jdbc.initDB();
+		new StudentsPanel("111222333");
 		new MainFrame();
 	}
 }

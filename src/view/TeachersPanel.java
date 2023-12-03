@@ -19,7 +19,7 @@ import controller.Info;
 @SuppressWarnings("serial")
 public class TeachersPanel extends JFrame implements ActionListener {
 	/*
-	 * ½ÌÊ¦µÇÂ½ºó²Ù×÷Ö÷½çÃæ
+	 * ï¿½ï¿½Ê¦ï¿½ï¿½Â½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	
 	String idd;
@@ -27,20 +27,20 @@ public class TeachersPanel extends JFrame implements ActionListener {
 	JButton infoButton, gradeButton, courseButton, editButton, courseView, sortGrade;
 
 	public TeachersPanel(String idd) {
-		super("½ÌÊ¦");
+		super("ï¿½ï¿½Ê¦");
 		this.idd = idd;
 		setLocation(300, 200);
 		setSize(300, 340);
 		contain = new JPanel();
 		contain.setLayout(null);
 		add(contain);
-		infoButton = new JButton("ÐÅÏ¢²éÑ¯");
-		gradeButton = new JButton("³É¼¨µÇÂ¼");
-		courseButton = new JButton("È«²¿¿Î³Ì");
-		editButton = new JButton("ÐÞ¸ÄÐÅÏ¢");
-		courseView = new JButton("¿ª¿Î");
+		infoButton = new JButton("ï¿½ï¿½Ï¢ï¿½ï¿½Ñ¯");
+		gradeButton = new JButton("ï¿½É¼ï¿½ï¿½ï¿½Â¼");
+		courseButton = new JButton("È«ï¿½ï¿½ï¿½Î³ï¿½");
+		editButton = new JButton("ï¿½Þ¸ï¿½ï¿½ï¿½Ï¢");
+		courseView = new JButton("ï¿½ï¿½ï¿½ï¿½");
 		
-		sortGrade = new JButton("³É¼¨Í³¼Æ");
+		sortGrade = new JButton("ï¿½É¼ï¿½Í³ï¿½ï¿½");
 		
 		infoButton.setBounds(70, 40, 140, 30);
 		editButton.setBounds(70, 80, 140, 30);
@@ -71,7 +71,7 @@ public class TeachersPanel extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == infoButton) {
-			new Info(idd, 0);
+			new Info(idd, 0,contain);
 		}
 		if (e.getSource() == gradeButton) {
 			new GradeEnter(idd);

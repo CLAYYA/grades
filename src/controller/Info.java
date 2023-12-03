@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import Dao.Jdbc;
 import model.*;
 
-public class Info extends JFrame {
+public class Info extends JPanel {
     /**
      * 用户查询个人信息
      */
@@ -27,14 +27,14 @@ public class Info extends JFrame {
     Student stu;
     Teacher t;
 
-    public Info(String id, int flag) {
-        super("信息");
+    public Info(String id, int flag, JPanel contain) {
+//        super("信息");
         this.id = id;
-        setSize(300, 340);
-        setLocation(600, 400);
+//        setSize(300, 340);
+//        setLocation(600, 400);
         stuInfoJPanel = new JPanel();
         stuInfoJPanel.setLayout(new GridLayout(20, 1));
-        add(stuInfoJPanel);
+        contain.add(stuInfoJPanel);
         ResultSet rs = Jdbc.SelectById("User", "id", id);
         try {
             rs.next();
@@ -73,11 +73,12 @@ public class Info extends JFrame {
         enableEvents(AWTEvent.WINDOW_EVENT_MASK);
         setVisible(true);
     }
-
-    public void processWindowEvent(WindowEvent e) {
-        if (e.getID() == WindowEvent.WINDOW_CLOSING) {
-            this.dispose();
-            setVisible(false);
-        }
-    }
 }
+
+//    public void processWindowEvent(WindowEvent e) {
+//        if (e.getID() == WindowEvent.WINDOW_CLOSING) {
+//            this.dispose();
+//            setVisible(false);
+//        }
+//    }
+//}

@@ -5,9 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import controller.CourseView;
 import controller.EditInfo;
@@ -21,26 +19,31 @@ public class StudentsPanel extends JFrame implements ActionListener {
 	/*
 	 * 学生登陆后操作主界面
 	 */
-	JPanel contain;
+	JPanel contain,contain1;
 	String id;
+	Box hbox;
 	JButton infoButton, gradeButton, courseButton, editButton;
 
 	public StudentsPanel(String id) {
 		super("学生");
 		this.id = id;
 		setLocationRelativeTo(null);
-		setSize(1000, 800);
+		hbox=Box.createVerticalBox();
+		add(hbox);
+		setSize(400, 700);
 		contain = new JPanel();
+		hbox.add(contain);
+
 		contain.setLayout(new FlowLayout(FlowLayout.CENTER));
-		add(contain);
+
 		infoButton = new JButton("信息查询");
 		gradeButton = new JButton("成绩查询");
 		courseButton = new JButton("课程查询");
 		editButton = new JButton("修改信息");
-		infoButton.setBounds(70, 40, 140, 30);
-		gradeButton.setBounds(70, 80, 140, 30);
-		courseButton.setBounds(70, 120, 140, 30);
-		editButton.setBounds(70, 160, 140, 30);
+		infoButton.setPreferredSize(new Dimension(400,100));
+		gradeButton.setPreferredSize(new Dimension(400,100));
+		courseButton.setPreferredSize(new Dimension(400,100));
+		editButton.setPreferredSize(new Dimension(400,100));
 		contain.add(infoButton);
 		infoButton.addActionListener(this);
 		contain.add(gradeButton);
@@ -49,13 +52,20 @@ public class StudentsPanel extends JFrame implements ActionListener {
 		courseButton.addActionListener(this);
 		contain.add(editButton);
 		editButton.addActionListener(this);
+
+//		pack();
 		setVisible(true);
+		setResizable(false);
 		enableEvents(AWTEvent.WINDOW_EVENT_MASK);
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == infoButton) {
-			new Info(id, 1);
+			contain1 = new JPanel();
+			hbox.add(contain1);
+			new Info(id, 1,contain1);
+			contain.updateUI();
+			pack();
 		}
 		if (e.getSource() == gradeButton) {
 			new GradeInfo(id);
