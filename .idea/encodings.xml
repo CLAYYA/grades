@@ -2,10 +2,13 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/Dao/Jdbc.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/controller/CourseView.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/controller/EditInfo.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/controller/GradeInfo.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/controller/Info.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/view/AdministratorPanel.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/view/MainFrame.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/view/StudentsPanel.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/view/TeachersPanel.java" charset="GBK" />
   </component>
 </project>

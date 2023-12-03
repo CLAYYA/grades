@@ -14,7 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-public class GradeInfo extends JFrame { 
+public class GradeInfo extends JPanel {
 	/**
 	 * 学生根据学号查询所有成绩
 	 */

@@ -2,9 +2,7 @@ package controller;
 
 import Dao.Jdbc;
 
-import java.awt.AWTEvent;
-import java.awt.Checkbox;
-import java.awt.CheckboxGroup;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -18,13 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class EditInfo extends JFrame implements ActionListener {
@@ -32,7 +24,6 @@ public class EditInfo extends JFrame implements ActionListener {
 	 * 用户修改信息
 	 */
 	String id;
-	JPanel contain;
 	JButton submit;
 	JLabel name, inst, birth, pass1, pass2, major;
 	JTextField namet, instt, birtht, pass1t, pass2t, majort;
@@ -40,14 +31,23 @@ public class EditInfo extends JFrame implements ActionListener {
 	CheckboxGroup group;
 	int flag;
 
-	public EditInfo(String id, int flag) {
-		super("修改信息");
-		setSize(300, 420);
-		setLocation(600, 400);
+	public EditInfo(String id, int flag,JPanel _contain) {
+
 		this.id = id;
 		this.flag = flag; // flag=0修改学生信息，flag=1修改教师信息
-		contain = new JPanel();
-		contain.setLayout(null);
+		Box vbox1 = Box.createVerticalBox();
+		Box vbox2 = Box.createVerticalBox();
+		Box vbox = Box.createVerticalBox();
+		Box hbox1 = Box.createHorizontalBox();
+		Box hbox2 = Box.createHorizontalBox();
+		JPanel contain1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		JPanel contain2 = new JPanel(new FlowLayout(FlowLayout.CENTER,100,10));
+		JPanel contain3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		JPanel contain4 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		JPanel contain5 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		JPanel contain6 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		JPanel contain7 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		JPanel contain8 = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		name = new JLabel("姓名");
 		birth = new JLabel("生日");
 		inst = new JLabel("学院");
@@ -64,38 +64,51 @@ public class EditInfo extends JFrame implements ActionListener {
 		majort = new JTextField();
 		pass1t = new JPasswordField();
 		pass2t = new JPasswordField();
-		name.setBounds(42, 20, 75, 35);
-		namet.setBounds(80, 20, 150, 35);
-		check1.setBounds(80, 60, 80, 40);
-		check2.setBounds(160, 60, 80, 40);
-		birth.setBounds(42, 100, 75, 35);
-		birtht.setBounds(80, 100, 150, 35);
-		inst.setBounds(40, 145, 75, 35);
-		instt.setBounds(80, 145, 150, 35);
-		major.setBounds(40, 190, 75, 35);
-		majort.setBounds(80, 190, 150, 35);
-		pass1.setBounds(36, 235, 75, 35);
-		pass1t.setBounds(80, 235, 150, 35);
-		pass2.setBounds(28, 280, 75, 35);
-		pass2t.setBounds(80, 280, 150, 35);
-		submit.setBounds(102, 325, 70, 30);
-		contain.add(name);
-		contain.add(namet);
-		contain.add(check1);
-		contain.add(check2);
-		contain.add(birth);
-		contain.add(birtht);
-		contain.add(inst);
-		contain.add(instt);
-		contain.add(major);
-		contain.add(majort);
-		contain.add(pass1);
-		contain.add(pass1t);
-		contain.add(pass2);
-		contain.add(pass2t);
-		contain.add(submit);
+		name.setPreferredSize(new Dimension(160,80));
+		namet.setPreferredSize(new Dimension(300,80));
+		check1.setPreferredSize(new Dimension(80, 40));
+		check2.setPreferredSize(new Dimension( 80, 40));
+		birth.setPreferredSize(new Dimension(160, 80));
+		birtht.setPreferredSize(new Dimension(300, 80));
+		inst.setPreferredSize(new Dimension( 160, 80));
+		instt.setPreferredSize(new Dimension( 300, 80));
+		major.setPreferredSize(new Dimension( 160, 80));
+		majort.setPreferredSize(new Dimension( 300, 80));
+		pass1.setPreferredSize(new Dimension(160, 80));
+		pass1t.setPreferredSize(new Dimension( 300, 80));
+		pass2.setPreferredSize(new Dimension(160, 80));
+		pass2t.setPreferredSize(new Dimension( 300, 80));
+		submit.setPreferredSize(new Dimension( 250, 80));
+
+		contain1.add(name);
+		contain1.add(namet);
+		contain2.add(check1);
+		contain2.add(check2);
+		contain3.add(birth);
+		contain3.add(birtht);
+		contain4.add(inst);
+		contain4.add(instt);
+		contain5.add(major);
+		contain5.add(majort);
+		contain6.add(pass1);
+		contain6.add(pass1t);
+		contain7.add(pass2);
+		contain7.add(pass2t);
+		contain8.add(submit);
+		vbox1.add(contain1);
+		vbox1.add(contain2);
+		vbox1.add(contain3);
+		vbox2.add(contain4);
+		vbox2.add(contain5);
+		hbox2.add(contain6);
+		hbox2.add(contain7);
+		hbox1.add(vbox1);
+		hbox1.add(vbox2);
+		vbox.add(hbox1);
+		vbox.add(hbox2);
+		vbox.add(contain8);
 		submit.addActionListener(this);
-		add(contain);
+		_contain.add(vbox);
 		setVisible(true);
 		enableEvents(AWTEvent.WINDOW_EVENT_MASK);
 	}

@@ -19,33 +19,33 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 @SuppressWarnings("serial")
-public class CourseView extends JFrame {
+public class CourseView extends JPanel {
 	/*
 	 * 学生查询课程，教师查询所教授课程
 	 */
 	
 	JPanel contain;
 	JTextArea list;
-	public CourseView(String id, int flag,String a){
-		super("课程");
-		setSize(330, 400);
-		contain = new JPanel();
-		setLocation(600, 400);
-		list = new JTextArea();
-		list.setEditable(false);
-		contain.add(list);
-		list.append("课程编号\t课程名\t学分\t学时\n");
+//	public CourseView(String id, int flag,String a,JPanel _contain){
+//		super("课程");
+//
+//		contain = new JPanel();
+//		_contain.add(contain);
+//
+//		list = new JTextArea();
+//		list.setEditable(false);
+//		contain.add(list);
+//		list.append("课程编号\t课程名\t学分\t学时\n");
+//
+//		String courseid;
+//		String coursename;
+//		String credit = null;
+//		String classhour = null;
+//	}
+	public CourseView(String id, int flag,JPanel _contain) {
 
-		String courseid;
-		String coursename;
-		String credit = null;
-		String classhour = null;
-	}
-	public CourseView(String id, int flag) {
-		super("课程");
-		setSize(330, 400);
+
 		contain = new JPanel();
-		setLocation(600, 400);
 		list = new JTextArea();
 		list.setEditable(false);
 		contain.add(list);
@@ -83,7 +83,7 @@ public class CourseView extends JFrame {
 			throw new RuntimeException(e);
 		}
 
-		add(contain);
+		_contain.add(contain);
 		setVisible(true);
 	}
 }

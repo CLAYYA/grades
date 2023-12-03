@@ -19,20 +19,20 @@ public class StudentsPanel extends JFrame implements ActionListener {
 	/*
 	 * 学生登陆后操作主界面
 	 */
-	JPanel contain;
+	JPanel contain,_contain;
 	String id;
-	Box hbox;
+	Box vbox;
 	JButton infoButton, gradeButton, courseButton, editButton;
 
 	public StudentsPanel(String id) {
 		super("学生");
 		this.id = id;
 		setLocationRelativeTo(null);
-		hbox=Box.createVerticalBox();
-		add(hbox);
+		vbox=Box.createVerticalBox();
+		add(vbox);
 		setSize(400, 700);
 		contain = new JPanel();
-		hbox.add(contain);
+		vbox.add(contain);
 
 		contain.setLayout(new FlowLayout(FlowLayout.CENTER));
 
@@ -52,8 +52,8 @@ public class StudentsPanel extends JFrame implements ActionListener {
 		courseButton.addActionListener(this);
 		contain.add(editButton);
 		editButton.addActionListener(this);
-
 //		pack();
+		 _contain = new JPanel();
 		setVisible(true);
 		setResizable(false);
 		enableEvents(AWTEvent.WINDOW_EVENT_MASK);
@@ -61,24 +61,32 @@ public class StudentsPanel extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == infoButton) {
-			JPanel _contain = new JPanel();
-			hbox.add(_contain);
+			_contain.removeAll();
+			vbox.add(_contain);
 			new Info(id, 1,_contain);
 			contain.updateUI();
 			pack();
 		}
 		if (e.getSource() == gradeButton) {
-			JPanel _contain = new JPanel();
-			hbox.add(_contain);
+			_contain.removeAll();
+			vbox.add(_contain);
 			new GradeInfo(id,_contain);
 			contain.updateUI();
 			pack();
 		}
 		if (e.getSource() == courseButton) {
-			new CourseView(id, 0);
+			_contain.removeAll();
+			vbox.add(_contain);
+			new CourseView(id, 0,_contain);
+			contain.updateUI();
+			pack();
 		}
 		if (e.getSource() == editButton) {
-			new EditInfo(id, 0);
+			_contain.removeAll();
+			vbox.add(_contain);
+			new EditInfo(id, 0,_contain);
+			contain.updateUI();
+			pack();
 		}
 	}
 

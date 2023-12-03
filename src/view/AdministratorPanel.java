@@ -54,7 +54,7 @@ public class AdministratorPanel extends JFrame implements ActionListener {
 		} else if (e.getSource() == deleteUser) {
 			new DeleteUser();
 		} else if (e.getSource() == selfInfo) {
-			new EditInfo(idd, 3);
+			new EditInfo(idd, 3,contain);
 		}
 	}
 

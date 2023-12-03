@@ -177,7 +177,8 @@ public class MainFrame extends JFrame implements ActionListener {
 		UIManager.put("ProgressBar.arc", 7);
 		UIManager.put("TextField.arc", 999);
 		Jdbc.initDB();
-		new StudentsPanel("111222333");
+//		new StudentsPanel("111222333");
+		new TeachersPanel("123");
 //		new MainFrame();
 	}
 }
