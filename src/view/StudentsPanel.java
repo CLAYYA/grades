@@ -1,6 +1,6 @@
 package view;
 
-import java.awt.AWTEvent;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -28,10 +28,10 @@ public class StudentsPanel extends JFrame implements ActionListener {
 	public StudentsPanel(String id) {
 		super("学生");
 		this.id = id;
-		setLocation(300, 200);
-		setSize(300, 340);
+		setLocationRelativeTo(null);
+		setSize(1000, 800);
 		contain = new JPanel();
-		contain.setLayout(null);
+		contain.setLayout(new FlowLayout(FlowLayout.CENTER));
 		add(contain);
 		infoButton = new JButton("信息查询");
 		gradeButton = new JButton("成绩查询");
