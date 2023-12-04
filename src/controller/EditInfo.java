@@ -138,6 +138,7 @@ public class EditInfo extends JPanel implements ActionListener {
 					Connection connection = Jdbc.CONNECTION;
 					try {
 						PreparedStatement preparedStatement = connection.prepareStatement("UPDATE User SET UserName=? ,Password=?,Birthday=?,Institute=?,Major=?,Sex = ? WHERE id = ?");
+
 						preparedStatement.setString(1,namet.getText());
 						preparedStatement.setString(2,pass1t.getText());
 						preparedStatement.setString(3,birtht.getText());

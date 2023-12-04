@@ -1,9 +1,7 @@
 package view;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 
 import javax.swing.*;
 import javax.swing.JButton;
@@ -71,8 +69,9 @@ public class MainFrame extends JFrame implements ActionListener {
 		logon.addActionListener(this);
 		add(contain);
 		setVisible(true);
-		setResizable(false);
 		enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+
+
 	}
 
 	public void actionPerformed(ActionEvent e) {
