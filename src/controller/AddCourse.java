@@ -143,7 +143,9 @@ public class AddCourse extends JPanel implements ActionListener {
                             stm.executeUpdate();
                         }else {
                             String courses = rs.getString("Courses")+","+idt.getText();
-
+                            stm.setString(1,courses);
+                            stm.setString(2,teacherIdt.getText());
+                            stm.executeUpdate();
                         }
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);

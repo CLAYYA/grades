@@ -180,7 +180,7 @@ public class MainFrame extends JFrame implements ActionListener {
 		Jdbc.initDB();
 //		new StudentsPanel("111222333");
 //		new TeachersPanel("123");
-		new AdministratorPanel("0");
-//		new MainFrame();
+//		new AdministratorPanel("0");
+		new MainFrame();
 	}
 }
