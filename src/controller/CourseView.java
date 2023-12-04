@@ -21,13 +21,13 @@ import javax.swing.JTextArea;
 @SuppressWarnings("serial")
 public class CourseView extends JPanel {
 	/*
-	 * 学生查询课程，教师查询所教授课程
+	 * 学锟斤拷锟斤拷询锟轿程ｏ拷锟斤拷师锟斤拷询锟斤拷锟斤拷锟节课筹拷
 	 */
 	
 	JPanel contain;
 	JTextArea list;
 //	public CourseView(String id, int flag,String a,JPanel _contain){
-//		super("课程");
+//		super("锟轿筹拷");
 //
 //		contain = new JPanel();
 //		_contain.add(contain);
@@ -35,7 +35,7 @@ public class CourseView extends JPanel {
 //		list = new JTextArea();
 //		list.setEditable(false);
 //		contain.add(list);
-//		list.append("课程编号\t课程名\t学分\t学时\n");
+//		list.append("锟轿程憋拷锟絓t锟轿筹拷锟斤拷\t学锟斤拷\t学时\n");
 //
 //		String courseid;
 //		String coursename;
@@ -49,7 +49,7 @@ public class CourseView extends JPanel {
 		list = new JTextArea();
 		list.setEditable(false);
 		contain.add(list);
-		list.append("课程编号\t课程名\t学分\t学时\n");
+		list.append("锟轿程憋拷锟絓t锟轿筹拷锟斤拷\t学锟斤拷\t学时\n");
 
 		String courseid;
 		String coursename;
@@ -82,7 +82,6 @@ public class CourseView extends JPanel {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-
 		_contain.add(contain);
 		setVisible(true);
 	}
