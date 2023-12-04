@@ -56,7 +56,6 @@ public class DeleteUser extends JPanel implements ActionListener {
 		contain1.add(idt);
 		contain2.add(chooice);
 		contain3.add(submit);
-
 		vbox.add(contain1);
 		vbox.add(contain2);
 		vbox.add(contain3);
