@@ -1,7 +1,7 @@
 package controller;
 
 
-import java.awt.AWTEvent;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -14,19 +14,14 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import Dao.Jdbc;
 import model.Course;
 
 
 @SuppressWarnings("serial")
-public class AddCourse extends JFrame implements ActionListener {
+public class AddCourse extends JPanel implements ActionListener {
     /*
      * 教师增加课程
      */
@@ -37,12 +32,17 @@ public class AddCourse extends JFrame implements ActionListener {
     JLabel id, name, gredit, classH, teacherId, teacherName;
     JTextField idt, namet, greditt, classHt, teacherIdt, teacherNamet;
 
-    public AddCourse() {
-        super("增加课程");
-        setSize(400, 400);
-        setLocation(600, 400);
-        contain = new JPanel();
-        contain.setLayout(null);
+    public AddCourse(JPanel _contain) {
+//        super("增加课程");
+//        setSize(400, 400);
+//        setLocation(600, 400);
+        JPanel contain1 = new JPanel(new FlowLayout(FlowLayout.CENTER,10,10));
+        JPanel contain2 = new JPanel(new FlowLayout(FlowLayout.CENTER,10,10));
+        JPanel contain3 = new JPanel(new FlowLayout(FlowLayout.CENTER,10,10));
+        JPanel contain4 = new JPanel(new FlowLayout(FlowLayout.CENTER,10,10));
+        JPanel contain5 = new JPanel(new FlowLayout(FlowLayout.CENTER,10,10));
+        JPanel contain6 = new JPanel(new FlowLayout(FlowLayout.CENTER,10,10));
+        Box vbox = Box.createVerticalBox();
         id = new JLabel("课程号");
         name = new JLabel("课程名");
         gredit = new JLabel("学分");
@@ -59,37 +59,43 @@ public class AddCourse extends JFrame implements ActionListener {
         teacherIdt = new JTextField();
         teacherNamet = new JTextField();
 
-        id.setBounds(42, 35, 75, 35);
-        idt.setBounds(80, 35, 150, 35);
-        name.setBounds(40, 90, 75, 35);
-        namet.setBounds(80, 90, 150, 35);
-        gredit.setBounds(45, 145, 75, 35);
-        greditt.setBounds(80, 145, 150, 35);
-        classH.setBounds(45, 200, 75, 35);
-        classHt.setBounds(80, 200, 150, 35);
+        id.setPreferredSize(new Dimension(160,80));
+        idt.setPreferredSize(new Dimension(300, 80));
+        name.setPreferredSize(new Dimension(160,80));
+        namet.setPreferredSize(new Dimension(300, 80));
+        gredit.setPreferredSize(new Dimension(160,80));
+        greditt.setPreferredSize(new Dimension(300, 80));
+        classH.setPreferredSize(new Dimension(160,80));
+        classHt.setPreferredSize(new Dimension(300, 80));
 
-        teacherId.setBounds(45, 245, 75, 35);
-        teacherIdt.setBounds(85, 245, 150, 35);
+        teacherId.setPreferredSize(new Dimension(160,80));
+        teacherIdt.setPreferredSize(new Dimension(300, 80));
 
-        teacherName.setBounds(45, 280, 75, 35);
-        teacherNamet.setBounds(80, 280, 75, 35);
+        teacherName.setPreferredSize(new Dimension(160,80));
+        teacherNamet.setPreferredSize(new Dimension(300, 80));
 
-        submit.setBounds(102, 320, 70, 30);
-        contain.add(id);
-        contain.add(idt);
-        contain.add(name);
-        contain.add(namet);
-        contain.add(gredit);
-        contain.add(greditt);
-        contain.add(classH);
-        contain.add(classHt);
-        contain.add(teacherId);
-        contain.add(teacherIdt);
-        contain.add(teacherName);
-        contain.add(teacherNamet);
-        contain.add(submit);
+        submit.setPreferredSize(new Dimension( 250, 80));
+        contain1.add(id);
+        contain1.add(idt);
+        contain2.add(name);
+        contain2.add(namet);
+        contain3.add(gredit);
+        contain3.add(greditt);
+        contain4.add(classH);
+        contain4.add(classHt);
+        contain5.add(teacherId);
+        contain5.add(teacherIdt);
+        contain6.add(teacherName);
+        contain6.add(teacherNamet);
+        vbox.add(contain1);
+        vbox.add(contain2);
+        vbox.add(contain3);
+        vbox.add(contain4);
+        vbox.add(contain5);
+        vbox.add(contain6);
+        vbox.add(submit);
         submit.addActionListener(this);
-        add(contain);
+        _contain.add(vbox);
         setVisible(true);
         enableEvents(AWTEvent.WINDOW_EVENT_MASK);
     }
@@ -148,10 +154,5 @@ public class AddCourse extends JFrame implements ActionListener {
 
     }
 
-    public void processWindowEvent(WindowEvent e) {
-        if (e.getID() == WindowEvent.WINDOW_CLOSING) {
-            this.dispose();
-            setVisible(false);
-        }
-    }
+
 }

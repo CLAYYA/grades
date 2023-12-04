@@ -172,13 +172,15 @@ public class MainFrame extends JFrame implements ActionListener {
 			System.err.println("Failed to initialize LaF");
 		}
 		InitGlobalFont(new Font("ËÎÌו", Font.PLAIN, 36));
-		UIManager.put("Button.arc", 999);
-		UIManager.put("Component.arc", 999);
+		UIManager.put("Button.arc", 20);
+		UIManager.put("TextComponent.arc", 999);
+		UIManager.put( "Component.focusWidth", 3);
 		UIManager.put("ProgressBar.arc", 7);
 		UIManager.put("TextField.arc", 999);
 		Jdbc.initDB();
 //		new StudentsPanel("111222333");
-		new TeachersPanel("123");
+//		new TeachersPanel("123");
+		new AdministratorPanel("0");
 //		new MainFrame();
 	}
 }

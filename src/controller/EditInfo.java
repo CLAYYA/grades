@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 @SuppressWarnings("serial")
-public class EditInfo extends JFrame implements ActionListener {
+public class EditInfo extends JPanel implements ActionListener {
 	/*
 	 * 用户修改信息
 	 */
@@ -45,8 +45,8 @@ public class EditInfo extends JFrame implements ActionListener {
 		JPanel contain3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JPanel contain4 = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JPanel contain5 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		JPanel contain6 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		JPanel contain7 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		JPanel contain6 = new JPanel(new FlowLayout(FlowLayout.CENTER,10,70));
+		JPanel contain7 = new JPanel(new FlowLayout(FlowLayout.CENTER,10,70));
 		JPanel contain8 = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		name = new JLabel("姓名");
 		birth = new JLabel("生日");
@@ -65,7 +65,7 @@ public class EditInfo extends JFrame implements ActionListener {
 		pass1t = new JPasswordField();
 		pass2t = new JPasswordField();
 		name.setPreferredSize(new Dimension(160,80));
-		namet.setPreferredSize(new Dimension(300,80));
+		namet.setPreferredSize(new Dimension(300, 80));
 		check1.setPreferredSize(new Dimension(80, 40));
 		check2.setPreferredSize(new Dimension( 80, 40));
 		birth.setPreferredSize(new Dimension(160, 80));
@@ -155,10 +155,4 @@ public class EditInfo extends JFrame implements ActionListener {
 		}
 	}
 
-	public void processWindowEvent(WindowEvent e) {
-		if (e.getID() == WindowEvent.WINDOW_CLOSING) {
-			this.dispose();
-			setVisible(false);
-		}
-	}
 }

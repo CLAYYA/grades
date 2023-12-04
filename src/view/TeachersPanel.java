@@ -33,9 +33,9 @@ public class TeachersPanel extends JFrame implements ActionListener {
 		setLocationRelativeTo(null);
 		setSize(400, 1700);
 		contain1 = new JPanel();
-		contain1.setLayout(new FlowLayout(FlowLayout.CENTER));
+		contain1.setLayout(new FlowLayout(FlowLayout.CENTER,20,10));
 		contain2 = new JPanel();
-		contain2.setLayout(new FlowLayout(FlowLayout.CENTER));
+		contain2.setLayout(new FlowLayout(FlowLayout.CENTER,20,10));
 		hugecontain = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
 		vbox = Box.createVerticalBox();
@@ -100,6 +100,7 @@ public class TeachersPanel extends JFrame implements ActionListener {
 		}
 		if (e.getSource() == courseButton) {
 			_contain.removeAll();
+			__contain.removeAll();
 			vbox.add(_contain);
 			new CourseView(idd, 1,_contain);
 			_contain.updateUI();
@@ -107,6 +108,7 @@ public class TeachersPanel extends JFrame implements ActionListener {
 		}
 		if (e.getSource() == editButton) {
 			_contain.removeAll();
+			__contain.removeAll();
 			vbox.add(_contain);
 			new EditInfo(idd, 1,_contain);
 			_contain.updateUI();
@@ -114,15 +116,19 @@ public class TeachersPanel extends JFrame implements ActionListener {
 		}
 		if (e.getSource() == courseView) {
 			_contain.removeAll();
+			__contain.removeAll();
 			vbox.add(_contain);
-			new AddCourse();
+			new AddCourse(_contain);
 			_contain.updateUI();
 			pack();
 		}
 		if(e.getSource() == sortGrade){
 			_contain.removeAll();
+			__contain.removeAll();
+			self = this;
 			vbox.add(_contain);
-			new SortGradeFrame();
+			vbox.add(__contain);
+			new SortGradeFrame(hugecontain,_contain,__contain,self);
 			_contain.updateUI();
 			pack();
 		}

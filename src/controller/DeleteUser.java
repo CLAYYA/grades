@@ -3,8 +3,7 @@ package controller;
 
 import Dao.Jdbc;
 
-import java.awt.AWTEvent;
-import java.awt.Choice;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -18,14 +17,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
-public class DeleteUser extends JFrame implements ActionListener {
+public class DeleteUser extends JPanel implements ActionListener {
 	/**
 	 * 管理员删除用户
 	 */
@@ -39,12 +33,14 @@ public class DeleteUser extends JFrame implements ActionListener {
 	String file = System.getProperty("user.dir")+"/data/";
 	// String file = "D://test//";
 
-	public DeleteUser() {
-		super("删除用户");
-		setSize(300, 340);
-		setLocation(600, 400);
-		contain = new JPanel();
-		contain.setLayout(null);
+	public DeleteUser(JPanel _contain) {
+//		super("删除用户");
+//		setSize(300, 340);
+//		setLocation(600, 400);
+		JPanel contain1 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		JPanel contain2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		JPanel contain3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		Box vbox = Box.createVerticalBox();
 		chooice = new Choice();
 		chooice.addItem("学生");
 		chooice.addItem("教师");
@@ -52,16 +48,20 @@ public class DeleteUser extends JFrame implements ActionListener {
 		id = new JLabel("帐号");
 		submit = new JButton("提交");
 		idt = new JTextField();
-		id.setBounds(42, 45, 75, 35);
-		idt.setBounds(80, 45, 150, 35);
-		chooice.setBounds(80, 100, 150, 35);
-		submit.setBounds(102, 150, 70, 30);
-		contain.add(id);
-		contain.add(idt);
-		contain.add(chooice);
-		contain.add(submit);
+		id.setPreferredSize(new Dimension(160,80));
+		idt.setPreferredSize(new Dimension(300, 80));
+		chooice.setPreferredSize(new Dimension(300, 80));
+		submit.setPreferredSize(new Dimension( 250, 80));
+		contain1.add(id);
+		contain1.add(idt);
+		contain2.add(chooice);
+		contain3.add(submit);
+
+		vbox.add(contain1);
+		vbox.add(contain2);
+		vbox.add(contain3);
 		submit.addActionListener(this);
-		add(contain);
+		_contain.add(vbox);
 		setVisible(true);
 		enableEvents(AWTEvent.WINDOW_EVENT_MASK);
 	}
@@ -82,10 +82,5 @@ public class DeleteUser extends JFrame implements ActionListener {
 			}
 		}
 	}
-	public void processWindowEvent(WindowEvent e) {
-		if (e.getID() == WindowEvent.WINDOW_CLOSING) {
-			this.dispose();
-			setVisible(false);
-		}
-	}
+
 }

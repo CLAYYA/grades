@@ -46,7 +46,7 @@ public class GradeEnter extends JPanel implements ActionListener {
 //		setSize(300, 340);
 //		setLocation(600, 400);
 		contain = new JPanel();
-		contain.setLayout(new FlowLayout(FlowLayout.CENTER));
+		contain.setLayout(new FlowLayout(FlowLayout.CENTER,50,10));
 		_contain.add(contain);
 		id = new JLabel("¿Î³ÌºÅ");
 		idt = new JTextField();
