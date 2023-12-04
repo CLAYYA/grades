@@ -6,7 +6,7 @@ public class Jdbc {
     public static final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
     public static final String DB_URL = "jdbc:mariadb://localhost:3306/RJGC";
     public static final String USER = "root";
-    public static final String PWD = "926494";
+    public static final String PWD = "10987654321";
     public static Connection CONNECTION = null;
 
     public static void initDB(){
