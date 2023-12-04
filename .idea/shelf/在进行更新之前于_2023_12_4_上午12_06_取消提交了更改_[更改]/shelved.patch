@@ -1,0 +1,210 @@
+Index: .idea/encodings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"Encoding\">\n    <file url=\"file://$PROJECT_DIR$/src/Dao/Jdbc.java\" charset=\"GBK\" />\n    <file url=\"file://$PROJECT_DIR$/src/view/MainFrame.java\" charset=\"GBK\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/encodings.xml b/.idea/encodings.xml
+--- a/.idea/encodings.xml	(revision 251aac785a6bb8d271031f9c1016b3d199776939)
++++ b/.idea/encodings.xml	(date 1701618762426)
+@@ -2,6 +2,8 @@
+ <project version="4">
+   <component name="Encoding">
+     <file url="file://$PROJECT_DIR$/src/Dao/Jdbc.java" charset="GBK" />
++    <file url="file://$PROJECT_DIR$/src/controller/Info.java" charset="GBK" />
+     <file url="file://$PROJECT_DIR$/src/view/MainFrame.java" charset="GBK" />
++    <file url="file://$PROJECT_DIR$/src/view/StudentsPanel.java" charset="GBK" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: src/view/MainFrame.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package view;\r\n\r\nimport java.awt.AWTEvent;\r\nimport java.awt.Choice;\r\nimport java.awt.event.ActionEvent;\r\nimport java.awt.event.ActionListener;\r\nimport java.awt.event.WindowEvent;\r\n\r\nimport javax.swing.*;\r\nimport javax.swing.JButton;\r\nimport javax.swing.JFrame;\r\nimport javax.swing.JLabel;\r\nimport javax.swing.JOptionPane;\r\nimport javax.swing.JPanel;\r\nimport javax.swing.JPasswordField;\r\nimport javax.swing.JTextField;\r\n\r\nimport com.formdev.flatlaf.*;\r\nimport com.formdev.flatlaf.FlatDarculaLaf;\r\n\r\nimport controller.CheckInfo;\r\nimport Dao.Jdbc;\r\n\r\n\r\npublic class MainFrame extends JFrame implements ActionListener {\r\n\t/**\r\n\t * 登陆主界面\r\n\t */\r\n\tprivate static final long serialVersionUID = 1L;\r\n\tJTextField idTextField;\r\n\tJPasswordField passwdTextField;\r\n\tJLabel idLabel, passwdLabel,title;\r\n\tChoice chooice;\r\n\tJButton logon;\r\n\tJPanel contain;\r\n\t\r\n\tint count = 0;\r\n\r\n\tpublic MainFrame() {\r\n\t\tsuper(\"账号登陆\");\r\n\t\tsetLocationRelativeTo(null);\r\n\t\tsetSize(1000, 680);\r\n\t\ttitle = new JLabel(\"成绩管理系统\");\r\n\t\tcontain = new JPanel();\r\n\t\tcontain.setLayout(null);\r\n\t\tidLabel = new JLabel(\"ID号\");\r\n\t\tpasswdLabel = new JLabel(\"密码\");\r\n\t\tidTextField = new JTextField();\r\n\t\tpasswdTextField = new JPasswordField();\r\n\t\tlogon = new JButton(\"登陆\");\r\n\t\tchooice = new Choice();\r\n\t\tchooice.addItem(\"学生\");\r\n\t\tchooice.addItem(\"教师\");\r\n\t\t// chooice.addItem(\"教务员\");\r\n\t\tchooice.addItem(\"系统管理员\");\r\n\t\tidLabel.setBounds(42, 45, 75, 35);\r\n\t\tidTextField.setBounds(80, 45, 150, 35);\r\n\t\tpasswdLabel.setBounds(40, 100, 75, 35);\r\n\t\tpasswdTextField.setBounds(80, 100, 150, 35);\r\n\t\tchooice.setBounds(80, 160, 150, 35);\r\n\t\tlogon.setBounds(102, 220, 70, 30);\r\n\t\tcontain.add(title);\r\n\t\tcontain.add(idLabel);\r\n\t\tcontain.add(idTextField);\r\n\t\tcontain.add(passwdLabel);\r\n\t\tcontain.add(passwdTextField);\r\n\t\tcontain.add(chooice);\r\n\t\tcontain.add(logon);\r\n\t\tlogon.addActionListener(this);\r\n\t\tadd(contain);\r\n\t\tsetVisible(true);\r\n\t\tenableEvents(AWTEvent.WINDOW_EVENT_MASK);\r\n\t}\r\n\t\r\n\tpublic void actionPerformed(ActionEvent e) {\r\n\t\tif (e.getSource() == logon) {\r\n\t\t\tString ch = (String) chooice.getSelectedItem();\r\n\t\t\tif (ch == \"学生\") {\r\n\t\t\t\tif ((new CheckInfo().isMember(\"student\", idTextField.getText(),\r\n\t\t\t\t\t\tnew String(passwdTextField.getPassword()))) == 1) {\r\n\t\t\t\t\tsetVisible(false);\r\n\t\t\t\t\tnew StudentsPanel(idTextField.getText());\r\n\t\t\t\t} else {\r\n\t\t\t\t\tcount += 1;\r\n\t\t\t\t\tif (count <= 5) {\r\n\t\t\t\t\t\tJOptionPane.showMessageDialog(null, \"无此用户，或者密码输入错误！\",\r\n\t\t\t\t\t\t\t\t\"错误\", JOptionPane.INFORMATION_MESSAGE);\r\n\t\t\t\t\t}\r\n\t\t\t\t\tif (count > 5) {\r\n\t\t\t\t\t\tJOptionPane.showMessageDialog(null, \"错误次数超过5次！\",\r\n\t\t\t\t\t\t\t\t\"错误\", JOptionPane.INFORMATION_MESSAGE);\r\n\t\t\t\t\t\tthis.dispose();\r\n\t\t\t\t\t\tsetVisible(false);\r\n\t\t\t\t\t\tSystem.exit(0);\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\t\t\t} else if (ch == \"教师\") {\r\n\t\t\t\tif ((new CheckInfo().isMember(\"teacher\", idTextField.getText(),\r\n\t\t\t\t\t\tnew String(passwdTextField.getPassword(), 0,\r\n\t\t\t\t\t\t\t\tpasswdTextField.getPassword().length))) == 1) {\r\n\t\t\t\t\tsetVisible(false);\r\n\t\t\t\t\tnew TeachersPanel(idTextField.getText());\r\n\t\t\t\t} else {\r\n\t\t\t\t\tcount += 1;\r\n\t\t\t\t\tif (count <= 5) {\r\n\t\t\t\t\t\tJOptionPane.showMessageDialog(null, \"无此用户，或者密码输入错误！\",\r\n\t\t\t\t\t\t\t\t\"错误\", JOptionPane.INFORMATION_MESSAGE);\r\n\t\t\t\t\t}\r\n\t\t\t\t\tif (count > 5) {\r\n\t\t\t\t\t\tJOptionPane.showMessageDialog(null, \"错误次数超过5次！\",\r\n\t\t\t\t\t\t\t\t\"错误\", JOptionPane.INFORMATION_MESSAGE);\r\n\t\t\t\t\t\tthis.dispose();\r\n\t\t\t\t\t\tsetVisible(false);\r\n\t\t\t\t\t\tSystem.exit(0);\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\t\t\t} else if (ch == \"系统管理员\") {\r\n\t\t\t\tif ((new CheckInfo().isMember(\"administrator\", idTextField\r\n\t\t\t\t\t\t.getText(), new String(passwdTextField.getPassword(),\r\n\t\t\t\t\t\t0, passwdTextField.getPassword().length))) == 1) {\r\n\t\t\t\t\tsetVisible(false);\r\n\t\t\t\t\tnew AdministratorPanel(idTextField.getText());\r\n\t\t\t\t} else {\r\n\t\t\t\t\tcount += 1;\r\n\t\t\t\t\tif (count <= 5) {\r\n\t\t\t\t\t\tJOptionPane.showMessageDialog(null, \"无此用户，或者密码输入错误！\",\r\n\t\t\t\t\t\t\t\t\"错误\", JOptionPane.INFORMATION_MESSAGE);\r\n\t\t\t\t\t}\r\n\t\t\t\t\tif (count > 5) {\r\n\t\t\t\t\t\tJOptionPane.showMessageDialog(null, \"错误次数超过5次！\",\r\n\t\t\t\t\t\t\t\t\"错误\", JOptionPane.INFORMATION_MESSAGE);\r\n\t\t\t\t\t\tthis.dispose();\r\n\t\t\t\t\t\tsetVisible(false);\r\n\t\t\t\t\t\tSystem.exit(0);\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t\t\r\n\t}\r\n\r\n\t\r\n\r\n\tpublic void processWindowEvent(WindowEvent e) {\r\n\t\tif (e.getID() == WindowEvent.WINDOW_CLOSING) {\r\n\t\t\tthis.dispose();\r\n\t\t\tsetVisible(false);\r\n\t\t\tSystem.exit(0);\r\n\t\t}\r\n\t}\r\n\r\n\tpublic static void main(String[] args) {\r\n\r\n\t\tFlatDarculaLaf.install();\r\n\t\ttry {\r\n\t\t\tUIManager.setLookAndFeel( new FlatDarculaLaf());\r\n\t\t} catch( Exception ex ) {\r\n\t\t\tSystem.err.println( \"Failed to initialize LaF\" );\r\n\t\t}\r\n\t\tUIManager.put( \"Button.arc\", 7);\r\n\t\tUIManager.put( \"Component.arc\",7 );\r\n\t\tUIManager.put( \"ProgressBar.arc\", 7 );\r\n\t\tUIManager.put( \"TextComponent.arc\", 7 );\r\n\t\tJdbc.initDB();\r\n\t\tnew MainFrame();\r\n\t}\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>GBK
+===================================================================
+diff --git a/src/view/MainFrame.java b/src/view/MainFrame.java
+--- a/src/view/MainFrame.java	(revision 251aac785a6bb8d271031f9c1016b3d199776939)
++++ b/src/view/MainFrame.java	(date 1701619269797)
+@@ -1,7 +1,6 @@
+ package view;
+ 
+-import java.awt.AWTEvent;
+-import java.awt.Choice;
++import java.awt.*;
+ import java.awt.event.ActionEvent;
+ import java.awt.event.ActionListener;
+ import java.awt.event.WindowEvent;
+@@ -14,6 +13,10 @@
+ import javax.swing.JPanel;
+ import javax.swing.JPasswordField;
+ import javax.swing.JTextField;
++import javax.swing.plaf.FontUIResource;
++
++import java.util.Enumeration;
++import java.util.Hashtable;
+ 
+ import com.formdev.flatlaf.*;
+ import com.formdev.flatlaf.FlatDarculaLaf;
+@@ -29,20 +32,18 @@
+ 	private static final long serialVersionUID = 1L;
+ 	JTextField idTextField;
+ 	JPasswordField passwdTextField;
+-	JLabel idLabel, passwdLabel,title;
++	JLabel idLabel, passwdLabel, title;
+ 	Choice chooice;
+ 	JButton logon;
+-	JPanel contain;
+-	
++	JPanel contain, contain1, contain2, contain3;
+ 	int count = 0;
+ 
+ 	public MainFrame() {
+ 		super("账号登陆");
+ 		setLocationRelativeTo(null);
+-		setSize(1000, 680);
+-		title = new JLabel("成绩管理系统");
++		setSize(1000, 800);
+ 		contain = new JPanel();
+-		contain.setLayout(null);
++		contain.setLayout(new FlowLayout(FlowLayout.CENTER, 120, 80));
+ 		idLabel = new JLabel("ID号");
+ 		passwdLabel = new JLabel("密码");
+ 		idTextField = new JTextField();
+@@ -53,13 +54,13 @@
+ 		chooice.addItem("教师");
+ 		// chooice.addItem("教务员");
+ 		chooice.addItem("系统管理员");
+-		idLabel.setBounds(42, 45, 75, 35);
+-		idTextField.setBounds(80, 45, 150, 35);
+-		passwdLabel.setBounds(40, 100, 75, 35);
+-		passwdTextField.setBounds(80, 100, 150, 35);
+-		chooice.setBounds(80, 160, 150, 35);
+-		logon.setBounds(102, 220, 70, 30);
+-		contain.add(title);
++		contain.setPreferredSize(new Dimension(900, 600));
++		idLabel.setPreferredSize(new Dimension(250, 100));
++		idTextField.setPreferredSize(new Dimension(500, 100));
++		passwdLabel.setPreferredSize(new Dimension(250, 100));
++		passwdTextField.setPreferredSize(new Dimension(500, 100));
++		chooice.setPreferredSize(new Dimension(500, 100));
++		logon.setPreferredSize(new Dimension(270, 90));
+ 		contain.add(idLabel);
+ 		contain.add(idTextField);
+ 		contain.add(passwdLabel);
+@@ -69,9 +70,10 @@
+ 		logon.addActionListener(this);
+ 		add(contain);
+ 		setVisible(true);
++		setResizable(false);
+ 		enableEvents(AWTEvent.WINDOW_EVENT_MASK);
+ 	}
+-	
++
+ 	public void actionPerformed(ActionEvent e) {
+ 		if (e.getSource() == logon) {
+ 			String ch = (String) chooice.getSelectedItem();
+@@ -136,10 +138,9 @@
+ 				}
+ 			}
+ 		}
+-		
++
+ 	}
+ 
+-	
+ 
+ 	public void processWindowEvent(WindowEvent e) {
+ 		if (e.getID() == WindowEvent.WINDOW_CLOSING) {
+@@ -149,19 +150,31 @@
+ 		}
+ 	}
+ 
++	//设置全局字体
++	public static void InitGlobalFont(Font fnt) {
++		FontUIResource fontRes = new FontUIResource(fnt);
++		for (Enumeration keys = UIManager.getDefaults().keys(); keys.hasMoreElements(); ) {
++			Object key = keys.nextElement();
++			Object value = UIManager.get(key);
++			if (value instanceof FontUIResource)
++				UIManager.put(key, fontRes);
++		}
++	}
++
+ 	public static void main(String[] args) {
+ 
+ 		FlatDarculaLaf.install();
+ 		try {
+-			UIManager.setLookAndFeel( new FlatDarculaLaf());
+-		} catch( Exception ex ) {
+-			System.err.println( "Failed to initialize LaF" );
++			UIManager.setLookAndFeel(new FlatDarculaLaf());
++		} catch (Exception ex) {
++			System.err.println("Failed to initialize LaF");
+ 		}
+-		UIManager.put( "Button.arc", 7);
+-		UIManager.put( "Component.arc",7 );
+-		UIManager.put( "ProgressBar.arc", 7 );
+-		UIManager.put( "TextComponent.arc", 7 );
++		InitGlobalFont(new Font("宋体", Font.PLAIN, 36));
++		UIManager.put("Button.arc", 999);
++		UIManager.put("Component.arc", 999);
++		UIManager.put("ProgressBar.arc", 7);
++		UIManager.put("TextField.arc", 999);
+ 		Jdbc.initDB();
+ 		new MainFrame();
+ 	}
+-}
+\ No newline at end of file
++}
+Index: src/view/StudentsPanel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package view;\r\n\r\nimport java.awt.AWTEvent;\r\nimport java.awt.event.ActionEvent;\r\nimport java.awt.event.ActionListener;\r\nimport java.awt.event.WindowEvent;\r\n\r\nimport javax.swing.JButton;\r\nimport javax.swing.JFrame;\r\nimport javax.swing.JPanel;\r\n\r\nimport controller.CourseView;\r\nimport controller.EditInfo;\r\nimport controller.GradeInfo;\r\nimport controller.Info;\r\n\r\n\r\n\r\n@SuppressWarnings(\"serial\")\r\npublic class StudentsPanel extends JFrame implements ActionListener {\r\n\t/*\r\n\t * 学生登陆后操作主界面\r\n\t */\r\n\tJPanel contain;\r\n\tString id;\r\n\tJButton infoButton, gradeButton, courseButton, editButton;\r\n\r\n\tpublic StudentsPanel(String id) {\r\n\t\tsuper(\"学生\");\r\n\t\tthis.id = id;\r\n\t\tsetLocation(300, 200);\r\n\t\tsetSize(300, 340);\r\n\t\tcontain = new JPanel();\r\n\t\tcontain.setLayout(null);\r\n\t\tadd(contain);\r\n\t\tinfoButton = new JButton(\"信息查询\");\r\n\t\tgradeButton = new JButton(\"成绩查询\");\r\n\t\tcourseButton = new JButton(\"课程查询\");\r\n\t\teditButton = new JButton(\"修改信息\");\r\n\t\tinfoButton.setBounds(70, 40, 140, 30);\r\n\t\tgradeButton.setBounds(70, 80, 140, 30);\r\n\t\tcourseButton.setBounds(70, 120, 140, 30);\r\n\t\teditButton.setBounds(70, 160, 140, 30);\r\n\t\tcontain.add(infoButton);\r\n\t\tinfoButton.addActionListener(this);\r\n\t\tcontain.add(gradeButton);\r\n\t\tgradeButton.addActionListener(this);\r\n\t\tcontain.add(courseButton);\r\n\t\tcourseButton.addActionListener(this);\r\n\t\tcontain.add(editButton);\r\n\t\teditButton.addActionListener(this);\r\n\t\tsetVisible(true);\r\n\t\tenableEvents(AWTEvent.WINDOW_EVENT_MASK);\r\n\t}\r\n\r\n\tpublic void actionPerformed(ActionEvent e) {\r\n\t\tif (e.getSource() == infoButton) {\r\n\t\t\tnew Info(id, 1);\r\n\t\t}\r\n\t\tif (e.getSource() == gradeButton) {\r\n\t\t\tnew GradeInfo(id);\r\n\t\t}\r\n\t\tif (e.getSource() == courseButton) {\r\n\t\t\tnew CourseView(id, 0);\r\n\t\t}\r\n\t\tif (e.getSource() == editButton) {\r\n\t\t\tnew EditInfo(id, 0);\r\n\t\t}\r\n\t}\r\n\r\n\tpublic void processWindowEvent(WindowEvent e) {\r\n\t\tif (e.getID() == WindowEvent.WINDOW_CLOSING) {\r\n\t\t\tthis.dispose();\r\n\t\t\tsetVisible(false);\r\n\t\t\tSystem.exit(0);\r\n\t\t}\r\n\t}\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>GBK
+===================================================================
+diff --git a/src/view/StudentsPanel.java b/src/view/StudentsPanel.java
+--- a/src/view/StudentsPanel.java	(revision 251aac785a6bb8d271031f9c1016b3d199776939)
++++ b/src/view/StudentsPanel.java	(date 1701618907489)
+@@ -1,6 +1,6 @@
+ package view;
+ 
+-import java.awt.AWTEvent;
++import java.awt.*;
+ import java.awt.event.ActionEvent;
+ import java.awt.event.ActionListener;
+ import java.awt.event.WindowEvent;
+@@ -28,10 +28,10 @@
+ 	public StudentsPanel(String id) {
+ 		super("学生");
+ 		this.id = id;
+-		setLocation(300, 200);
+-		setSize(300, 340);
++		setLocationRelativeTo(null);
++		setSize(1000, 800);
+ 		contain = new JPanel();
+-		contain.setLayout(null);
++		contain.setLayout(new FlowLayout(FlowLayout.CENTER));
+ 		add(contain);
+ 		infoButton = new JButton("信息查询");
+ 		gradeButton = new JButton("成绩查询");
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1701610395597)
++++ b/.idea/vcs.xml	(date 1701610395597)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
